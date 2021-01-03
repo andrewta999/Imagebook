@@ -3,6 +3,8 @@ import bodyParser from 'body-parser'
 import cookieParser from 'cookie-parser'
 import cors from 'cors'
 
+require('dotenv').config()
+
 const app = express()
 
 app.use(bodyParser.json())

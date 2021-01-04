@@ -4,7 +4,7 @@ import React, { Component } from 'react'
 import { Route, Switch, Redirect } from 'react-router-dom'
 
 import config from './config'
-import { get_data, post_data, post_data_token, get_data_token, delete_data} from './api/index'
+import { get_data, post_data, post_data_token, get_data_token, delete_data } from './api/index'
 
 import NavBar from './component/NavBar'
 import Home from './page/Home'
@@ -33,16 +33,16 @@ export default class App extends Component {
         }
     }
 
-    async componentDidMount(){
+    async componentDidMount() {
         // get token on session storage if any
-        if(sessionStorage.getItem("token")){
+        if (sessionStorage.getItem("token")) {
             this.setState({
                 is_authenticated: true,
                 token: sessionStorage.getItem("token")
             })
         }
 
-        if(sessionStorage.getItem("user")){
+        if (sessionStorage.getItem("user")) {
             this.setState({
                 current_user: sessionStorage.getItem("user")
             })
@@ -60,7 +60,7 @@ export default class App extends Component {
 
     upload_image = async (event) => {
         event.preventDefault()
-        let {title, type, image, images, current_user, token} = this.state 
+        let { title, type, image, images, current_user, token } = this.state
 
         const form_data = new FormData()
         form_data.append("title", title)
@@ -70,7 +70,7 @@ export default class App extends Component {
         let url = `${config.host}/image/new/${current_user}`
         let result = await post_data_token(url, form_data, token, false)
         images[current_user].push(result)
-        this.setState({images})
+        this.setState({ images })
     }
 
     fetch_all_users = async () => {
@@ -78,44 +78,44 @@ export default class App extends Component {
         let result = await get_data(url)
 
         let users = {}
-        for (let user of result){
+        for (let user of result) {
             let user_id = user._id
-            users[user_id] = user 
+            users[user_id] = user
         }
-        this.setState({users})
+        this.setState({ users })
     }
 
     fetch_all_images = async () => {
-        let {users} = this.state 
+        let { users } = this.state
         let token = sessionStorage.getItem('token')
 
         let url = `${config.host}/image/`
         let images = {}
         if (token) {
-            for (let user_id of Object.keys(users)){
+            for (let user_id of Object.keys(users)) {
                 let result = await get_data_token(url + user_id, token)
-                images[user_id] = result 
-            }   
-        }else{
-            for (let user_id of Object.keys(users)){
+                images[user_id] = result
+            }
+        } else {
+            for (let user_id of Object.keys(users)) {
                 let result = await get_data(url + user_id)
-                images[user_id] = result 
-            }   
+                images[user_id] = result
+            }
         }
 
-        this.setState({images})
+        this.setState({ images })
     }
 
     delete_an_image = async (userId, imageId) => {
-        let {images, token} = this.state 
+        let { images, token } = this.state
         let url = `${config.host}/image/${imageId}`
         await delete_data(url, token)
-        
+
         let filtered_result = images[userId].filter((image) => {
-            return image._id !== imageId 
+            return image._id !== imageId
         })
         images[userId] = filtered_result
-        this.setState({images})
+        this.setState({ images })
     }
 
     signup_or_login = async (name) => {
@@ -141,7 +141,10 @@ export default class App extends Component {
         event.preventDefault()
 
         let result = await this.signup_or_login("user")
-        console.log(result)
+        if(!result || result["error"]){
+            alert("Signup failed")
+            return 
+        }
 
         this.setState({
             is_new: false
@@ -153,9 +156,14 @@ export default class App extends Component {
 
         let result = await this.signup_or_login("signin")
 
+        if (!result || result["error"]){
+            alert("Login failed")
+            return 
+        }
+
         // save token and set is_authenticated
         let token = result.token
-        let current_user = result.user._id 
+        let current_user = result.user._id
 
         sessionStorage.setItem("token", token)
         sessionStorage.setItem("user", current_user)
@@ -174,15 +182,15 @@ export default class App extends Component {
 
     logout = (event) => {
         event.preventDefault()
-        if (sessionStorage.getItem('token')){
+        if (sessionStorage.getItem('token')) {
             sessionStorage.removeItem('token')
             sessionStorage.removeItem('user')
         }
         this.setState({
             token: '',
-            is_authenticated: false, 
-            current_user: '', 
-            users: {}, 
+            is_authenticated: false,
+            current_user: '',
+            users: {},
             images: {}
         })
 
@@ -190,12 +198,12 @@ export default class App extends Component {
     }
 
     render() {
-        let { username, password, is_authenticated, is_new, 
-              users, images, current_user, type, image, title} = this.state
+        let { username, password, is_authenticated, is_new,
+            users, images, current_user, type, image, title } = this.state
 
         return <div className="App">
             <div>
-                <NavBar is_authenticated={is_authenticated} logout={this.logout}/>
+                <NavBar is_authenticated={is_authenticated} logout={this.logout} />
             </div>
             <div className="container-fluid">
                 <Switch>
@@ -206,8 +214,8 @@ export default class App extends Component {
                                 login={this.login} />}
                     </Route>
                     <Route path="/home">
-                        {!is_authenticated ? <Redirect to="/login"/> : 
-                            <Home users={users} images={images}/>}
+                        {!is_authenticated ? <Redirect to="/login" /> :
+                            <Home users={users} images={images} />}
                     </Route>
                     <Route path="/signup">
                         {!is_new ? <Redirect to="/login" /> :
@@ -216,16 +224,18 @@ export default class App extends Component {
                                 signup={this.signup} />}
                     </Route>
                     <Route path="/repo">
-                        {!is_authenticated ? <Redirect to="/login"/> : <ImageList user={users[current_user]} images={images[current_user]}/>}
+                        {!is_authenticated ? <Redirect to="/login" /> : <ImageList user={users[current_user]} images={images[current_user]} />}
                     </Route>
                     <Route path="/image/:userId/:imageId">
-                        <Image users={users} images={images} cur_user={current_user}
-                            delete_image={this.delete_an_image}/>
+                        {!is_authenticated ? <Redirect to="/login" /> :
+                            <Image users={users} images={images} cur_user={current_user}
+                                delete_image={this.delete_an_image} />}
                     </Route>
                     <Route path="/upload">
-                        <UploadImage type={type} image={image} title={title} 
-                            text_input_change={this.text_input_change}
-                            upload_image={this.upload_image}/>
+                        {!is_authenticated ? <Redirect to="/login" /> :
+                            <UploadImage type={type} image={image} title={title}
+                                text_input_change={this.text_input_change}
+                                upload_image={this.upload_image} />}
                     </Route>
                 </Switch>
             </div>

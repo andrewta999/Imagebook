@@ -60,7 +60,7 @@ let list_by_user = async (req, res) => {
 let delete_image = async (req, res) => {
     const image = req.image
     try {
-        let deleted_image = image.deleteOne()
+        let deleted_image = await image.deleteOne()
         res.json(deleted_image)
     } catch (err) {
         return res.status(400).json({

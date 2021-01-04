@@ -112,7 +112,7 @@ let is_author = async (req, res, next) => {
 
 
 let has_authorization = async (req, res, next) => {
-    const authorized = req.auth && req.image && req.image.posted_by._idn == req.auth._id;
+    const authorized = req.auth && req.image && req.image.posted_by._id == req.auth._id;
     if (!authorized) {
         return res.status('403').json({
             error: "User is not authorized"
@@ -121,6 +121,15 @@ let has_authorization = async (req, res, next) => {
     next()
 }
 
+let is_account = async (req, res, next) => {
+    const account = req.auth && req.profile && req.auth._id == req.profile._id 
+    if (!account) {
+        return res.status('403').json({
+            error: "User can not upload to this account"
+        })
+    }
+    next()
+}
 
 export default {
     signin, 
@@ -130,5 +139,6 @@ export default {
     user_id,
     require_signin, 
     is_author, 
-    has_authorization
+    has_authorization,
+    is_account 
 }

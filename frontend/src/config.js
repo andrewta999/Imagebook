@@ -1,5 +1,5 @@
 let config = {
-    "host": "http://localhost:3001/api"
+    "host": "https://imagebook-backend.herokuapp.com/api"
 }
 
 

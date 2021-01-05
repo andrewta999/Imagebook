@@ -1,5 +1,7 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
 var _express = _interopRequireDefault(require("express"));
 
 var _bodyParser = _interopRequireDefault(require("body-parser"));
@@ -11,8 +13,6 @@ var _mongoose = _interopRequireDefault(require("mongoose"));
 var _user_route = _interopRequireDefault(require("./route/user_route"));
 
 var _image_route = _interopRequireDefault(require("./route/image_route"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 require('dotenv').config();
 

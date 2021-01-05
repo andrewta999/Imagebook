@@ -1,5 +1,7 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -10,8 +12,6 @@ var _express = _interopRequireDefault(require("express"));
 var _image_controller = _interopRequireDefault(require("../controller/image_controller"));
 
 var _user_controller = _interopRequireDefault(require("../controller/user_controller"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 var router = _express["default"].Router(); // upload a new image
 

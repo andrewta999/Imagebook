@@ -26,7 +26,7 @@ Upon login, you can view all of your images or view public images of other peopl
 
 ## Development
 
-I you want to run this project locally, follow the following steps
+If you want to run this project locally, follow these steps
 
 1. Clone this repositoy
 
@@ -36,7 +36,7 @@ I you want to run this project locally, follow the following steps
 cd frontend
 ```
 
-3. Install all dependencies for frontend development
+3. Install all dependencies
 ```
 npm install
 ```
@@ -46,7 +46,7 @@ npm install
 npm start
 ```
 
-5. Vist http://localhost:3000 to access the platform
+5. Vist http://localhost:3000
 
 6. Deploy the frontend
 ```

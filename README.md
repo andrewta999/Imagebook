@@ -30,45 +30,53 @@ I you want to run this project locally, follow the following steps
 
 1. Clone this repositoy
 
+### Frontend Development
+2. cd into the frontend folder
+```
+cd frontend
+```
+
+3. Install all dependencies for frontend development
+```
+npm install
+```
+
+4. Start frontend development server 
+```
+npm start
+```
+
+5. Vist http://localhost:3000 to access the platform
+
+6. Deploy the frontend
+```
+npm run build
+npm run deploy
+```
+
 ### Backend Development
 
-2. Run this command to install all dependencies
+7. Run this command to install all dependencies
 ```
 npm instal
 ```
 
-3. Create a .env file on the root directory with the following credentials: 
+8. Create a .env file on the root directory with the following credentials: 
 ```
 JWT_SECRET="Any string you want"
 MONGODB="URI to a mongodb database"
 PORT=3001
 ```
 
-4. Run this command to start the backend in development mode
+9. Run this command to start the backend in development mode
 ```
 npm run dev
 ```
 
-5. Build and run the backend in production
+10. Build and run the backend in production
 ```
 npm run build
 npm start
 ```
 
-### Frontend Development
-6. cd into the frontend folder
-```
-cd frontend
-```
 
-7. Install all dependencies for frontend development
-```
-npm install
-```
-
-8. Start frontend development server 
-```
-npm start
-```
-
-9. Vist http://localhost:3000 to access the platform

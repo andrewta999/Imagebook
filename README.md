@@ -4,7 +4,8 @@ Imagebook is a web platform that allows users to store and access their images s
 
 ## Demo
 
-The project is deployed on Heroku for a quick demo. Link [here](https://imagebook1.herokuapp.com/). You can create a new account or use these credentials to login if you just want to quick test: 
+The backend is deployed on Heroku and the frontend is deployed as github pages. Visit the website [here](https://andrewta999.github.io/Imagebook). 
+You can create a new account or use these credentials to login if you just want to quick test: 
 - username: andrew
 - password: 12345 
 

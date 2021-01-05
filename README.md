@@ -28,7 +28,7 @@ Upon login, you can view all of your images or view public images of other peopl
 
 If you want to run this project locally, follow these steps
 
-1. Clone this repositoy
+1. Clone this repositoy and cd into the project directory
 
 ### Frontend Development
 2. cd into the frontend folder
@@ -58,7 +58,7 @@ npm run deploy
 
 7. Run this command to install all dependencies
 ```
-npm instal
+npm install
 ```
 
 8. Create a .env file on the root directory with the following credentials: 

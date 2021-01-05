@@ -2,9 +2,10 @@
 
 Imagebook is a web platform that allows users to store and access their images securely and easily. Users can create accounts and start uploading images to the platform. They can choose to allow public access of private access to their images. Furthermore, an user can view other people's public images, but only an owner can delete his or her images. All images are stored persistently on a database. 
 
-## Demo
+## Demo [link](https://andrewta999.github.io/Imagebook)
 
 The backend is deployed on Heroku and the frontend is deployed as github pages. Visit the website [here](https://andrewta999.github.io/Imagebook). 
+
 You can create a new account or use these credentials to login if you just want to quick test: 
 - username: andrew
 - password: 12345 
